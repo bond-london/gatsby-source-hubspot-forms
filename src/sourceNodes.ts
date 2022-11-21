@@ -9,7 +9,14 @@ export async function sourceNodes(
   reporter.info("fetching Hubspot Forms");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fetchAllFormNodes = await axios.get<any[]>(
-    `https://api.hubapi.com/forms/v2/forms?hapikey=${hubspotApiKey}`
+    `https://api.hubapi.com/forms/v2/forms`,
+    {
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        Authorization: `Bearer ${hubspotApiKey}`,
+        "Content-Type": "application/json",
+      },
+    }
   );
   const response = fetchAllFormNodes.data;
 
